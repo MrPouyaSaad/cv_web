@@ -1,3 +1,4 @@
+import 'package:cv_web/constant/color.dart';
 import 'package:cv_web/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: secondaryColor,
+            textStyle: TextStyle(fontWeight: FontWeight.w300),
+          ),
+        ),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
