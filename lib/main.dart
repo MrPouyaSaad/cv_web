@@ -19,12 +19,13 @@ class MyApp extends StatelessWidget {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: secondaryColor,
-            textStyle: TextStyle(fontWeight: FontWeight.w300),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+            textStyle: const TextStyle(fontWeight: FontWeight.w300),
           ),
         ),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }
