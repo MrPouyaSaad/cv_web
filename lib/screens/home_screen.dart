@@ -8,11 +8,11 @@ import 'package:get/get.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final GlobalKey _homeKey = GlobalKey();
-  final GlobalKey _aboutKey = GlobalKey();
-  final GlobalKey _skillsKey = GlobalKey();
-  final GlobalKey _projectsKey = GlobalKey();
-  final GlobalKey _contactKey = GlobalKey();
+  // final GlobalKey _homeKey = GlobalKey();
+  // final GlobalKey _aboutKey = GlobalKey();
+  // final GlobalKey _skillsKey = GlobalKey();
+  // final GlobalKey _projectsKey = GlobalKey();
+  // final GlobalKey _contactKey = GlobalKey();
 
   final ScrollController _scrollController = ScrollController();
 
@@ -33,15 +33,16 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-// pin App Bar => 955 // floating App bar 955 + 57 (for desktop)
-  final homeIndex = 0.0;
-  final aboutIndex = 955.0 + 57;
-  final skillsIndex = 1910.0 + 57;
-  final projectsIndex = 2866.0 + 57;
-  final contactIndex = 3820.0 + 57;
+// pin App Bar => 955 // floating App bar 955 + 60 (for desktop)
+  final double pinAppBar = 68;
 
   @override
   Widget build(BuildContext context) {
+    final double homeIndex = 0.0;
+    final double aboutIndex = 955 + pinAppBar;
+    final double skillsIndex = 1910 + pinAppBar;
+    final double projectsIndex = 2866 + pinAppBar;
+    final double contactIndex = 3820 + pinAppBar;
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColor,
@@ -99,38 +100,48 @@ class HomeScreen extends StatelessWidget {
               floating: true,
               pinned: false,
               snap: true,
-              title: Row(
+              expandedHeight: 68,
+              title: Column(
                 children: [
-                  Text('Hello!', style: TextStyle(fontSize: 28)),
-                  Spacer(),
-                  TextButton(
-                      onPressed: () {
-                        scrollToSection(homeIndex);
-                        //    scroll(homeIndex);
-                      },
-                      child: Text('Home')),
-                  TextButton(
-                      onPressed: () {
-                        scrollToSection(aboutIndex);
-                      },
-                      child: Text('About')),
-                  TextButton(
-                      onPressed: () {
-                        scrollToSection(skillsIndex);
-                      },
-                      child: Text('Skills')),
-                  TextButton(
-                      onPressed: () {
-                        scrollToSection(projectsIndex);
-                      },
-                      child: Text('Projects')),
-                  TextButton(
-                      onPressed: () {
-                        scrollToSection(contactIndex);
-                      },
-                      child: Text('Contact')),
+                  SizedBox(height: 16),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/saad_logo_dark.png',
+                        width: 168,
+                      ),
+                      Spacer(),
+                      TextButton(
+                          onPressed: () {
+                            scrollToSection(homeIndex);
+                            //    scroll(homeIndex);
+                          },
+                          child: Text('Home')),
+                      TextButton(
+                          onPressed: () {
+                            scrollToSection(aboutIndex);
+                          },
+                          child: Text('About')),
+                      TextButton(
+                          onPressed: () {
+                            scrollToSection(skillsIndex);
+                          },
+                          child: Text('Skills')),
+                      TextButton(
+                          onPressed: () {
+                            scrollToSection(projectsIndex);
+                          },
+                          child: Text('Projects')),
+                      TextButton(
+                          onPressed: () {
+                            scrollToSection(contactIndex);
+                          },
+                          child: Text('Contact')),
+                    ],
+                  ).paddingSymmetric(horizontal: 38),
                 ],
-              ).paddingSymmetric(horizontal: 64),
+              ),
             ),
             SliverList.builder(
               // physics: const BouncingScrollPhysics(),
@@ -141,7 +152,6 @@ class HomeScreen extends StatelessWidget {
                 switch (index) {
                   case 0:
                     return SizedBox(
-                      key: _homeKey,
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       child: Column(
@@ -182,36 +192,101 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ).paddingSymmetric(horizontal: 64);
                   case 1:
-                    return Container(
-                      key: _aboutKey,
+                    return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      color: Colors.pink,
-                      child: Center(child: Text('About')),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'about me',
+                            style: TextStyle(
+                              color: secondaryColor.withOpacity(0.6),
+                              fontSize: 34,
+                              backgroundColor: backgroundColor,
+                            ),
+                          ).paddingSymmetric(vertical: 32),
+                          Divider(
+                              height: 0, color: foregroundColor, thickness: 4),
+                          Container(
+                            color: backgroundColor,
+                            // child:
+                            //     Image.asset('assets/images/saad_logo_dark.png'),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 64),
                     );
                   case 2:
-                    return Container(
-                      key: _skillsKey,
+                    return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      color: Colors.pinkAccent,
-                      child: Center(child: Text('Skills')),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'skills',
+                            style: TextStyle(
+                              color: secondaryColor.withOpacity(0.6),
+                              fontSize: 34,
+                              backgroundColor: backgroundColor,
+                            ),
+                          ).paddingSymmetric(vertical: 32),
+                          Divider(
+                              height: 0, color: foregroundColor, thickness: 4),
+                          Container(
+                            color: backgroundColor,
+                            child: Center(child: Text('skill')),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 64),
                     );
                   case 3:
-                    return Container(
-                      key: _projectsKey,
+                    return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      color: Colors.orange,
-                      child: Center(child: Text('Project')),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'projects',
+                            style: TextStyle(
+                              color: secondaryColor.withOpacity(0.6),
+                              fontSize: 34,
+                              backgroundColor: backgroundColor,
+                            ),
+                          ).paddingSymmetric(vertical: 32),
+                          Divider(
+                              height: 0, color: foregroundColor, thickness: 4),
+                          Container(
+                            color: backgroundColor,
+                            child: Center(child: Text('About')),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 64),
                     );
                   case 4:
-                    return Container(
-                      key: _contactKey,
+                    return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      color: Colors.yellow,
-                      child: Center(child: Text('Contact')),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'contact',
+                            style: TextStyle(
+                              color: secondaryColor.withOpacity(0.6),
+                              fontSize: 34,
+                              backgroundColor: backgroundColor,
+                            ),
+                          ).paddingSymmetric(vertical: 32),
+                          Divider(
+                              height: 0, color: foregroundColor, thickness: 4),
+                          Container(
+                            color: backgroundColor,
+                            child: Center(child: Text('About')),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 64),
                     );
                 }
                 return null;
@@ -239,7 +314,8 @@ class NameWidget extends StatelessWidget {
         style: const TextStyle(
           height: 0.77,
           fontSize: 128,
-          fontWeight: FontWeight.bold,
+          fontFamily: 'PlusJakartaSansExtraBold',
+          fontWeight: FontWeight.w900,
           color: Colors.white,
         ),
       ),
