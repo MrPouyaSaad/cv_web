@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:cv_web/constant/about_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:cv_web/constant/color.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -46,51 +47,6 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColor,
-        // appBar: AppBar(
-        //   backgroundColor: backgroundColor,
-        //   foregroundColor: foregroundColor,
-        //   centerTitle: true,
-        //   elevation: 0.0,
-        //   // floating: true,
-        //   // snap: true,
-        //   // pinned: false,
-        //   leading: Text(
-        //     'Hello!',
-        //     style: TextStyle(
-        //         fontSize: 28,
-        //         fontWeight: FontWeight.bold,
-        //         color: foregroundColor),
-        //   ),
-        //   actions: [
-        //     TextButton(
-        //         onPressed: () {
-        //           //log(_scrollController.offset.toString());
-        //           scrollToSection(homeIndex, context);
-        //           //    scroll(homeIndex);
-        //         },
-        //         child: Text('Home')),
-        //     TextButton(
-        //         onPressed: () {
-        //           scrollToSection(aboutIndex, context);
-        //         },
-        //         child: Text('About')),
-        //     TextButton(
-        //         onPressed: () {
-        //           scrollToSection(skillsIndex, context);
-        //         },
-        //         child: Text('Skills')),
-        //     TextButton(
-        //         onPressed: () {
-        //           scrollToSection(projectsIndex, context);
-        //         },
-        //         child: Text('Projects')),
-        //     TextButton(
-        //         onPressed: () {
-        //           scrollToSection(contactIndex, context);
-        //         },
-        //         child: Text('Contact')),
-        //   ],
-        // ),
         body: CustomScrollView(
           controller: _scrollController,
           slivers: [
@@ -144,9 +100,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SliverList.builder(
-              // physics: const BouncingScrollPhysics(),
-              // padding: const EdgeInsets.all(48),
-
               itemCount: 5,
               itemBuilder: (context, index) {
                 switch (index) {
@@ -198,21 +151,40 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'about me',
-                            style: TextStyle(
-                              color: secondaryColor.withOpacity(0.6),
-                              fontSize: 34,
-                              backgroundColor: backgroundColor,
-                            ),
-                          ).paddingSymmetric(vertical: 32),
-                          Divider(
-                              height: 0, color: foregroundColor, thickness: 4),
-                          Container(
-                            color: backgroundColor,
-                            // child:
-                            //     Image.asset('assets/images/saad_logo_dark.png'),
-                          ),
+                          CategoryDivider(title: 'about me'),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  aboutMe,
+                                  style: TextStyle(
+                                      color: secondaryColor,
+                                      fontSize: 18,
+                                      wordSpacing: 2,
+                                      textBaseline: TextBaseline.ideographic),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 68,
+                              ),
+                              Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/uni_logo.png',
+                                    width: 148,
+                                  ),
+                                  SizedBox(
+                                    height: 32,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/flutter_logo.png',
+                                    width: 148,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ).marginSymmetric(vertical: 32),
+                          CategoryDivider(title: 'skills'),
                         ],
                       ).paddingSymmetric(horizontal: 64),
                     );
@@ -223,16 +195,7 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'skills',
-                            style: TextStyle(
-                              color: secondaryColor.withOpacity(0.6),
-                              fontSize: 34,
-                              backgroundColor: backgroundColor,
-                            ),
-                          ).paddingSymmetric(vertical: 32),
-                          Divider(
-                              height: 0, color: foregroundColor, thickness: 4),
+                          CategoryDivider(title: 'skills'),
                           Container(
                             color: backgroundColor,
                             child: Center(child: Text('skill')),
@@ -295,6 +258,31 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CategoryDivider extends StatelessWidget {
+  const CategoryDivider({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: secondaryColor.withOpacity(0.6),
+            fontSize: 34,
+            backgroundColor: backgroundColor,
+          ),
+        ).paddingSymmetric(vertical: 24),
+        Divider(height: 0, color: foregroundColor, thickness: 4),
+      ],
     );
   }
 }
